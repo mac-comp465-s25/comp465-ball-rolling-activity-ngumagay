@@ -9,6 +9,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/orthonormalize.hpp>
 
+
 using namespace basicgraphics;
 using namespace std;
 using namespace glm;
@@ -140,11 +141,13 @@ void ExampleApp::onRenderGraphicsContext(const VRGraphicsState &renderState) {
     //TODO: Update the sphereFrame matrix to move the ball's position based on the dir variable.
     //Make the ball rotate so that it looks like it is rolling on the table.
     
+    mat4 translation = translate(mat4(1.0), dir);
     
+    sphereFrame = translation * sphereFrame;
     
+    //Need to translate to the origin, rotate, then translate back to the position.
     
-    
-}
+    mat4 rotation = rotate(vec2(1.0), 20);
 
 void ExampleApp::onRenderGraphicsScene(const VRGraphicsState &renderState) {
     // This routine is called once per eye/camera.  This is the place to actually
